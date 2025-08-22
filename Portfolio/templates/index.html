@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Danish Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">Portfolio</div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="nav-right" id="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1>Hi, I'm <span class="highlight">Syed Danish Majaz</span></h1>
+            <h2>GenAI & Automation Enthusiast | Python & Flask Developer</h2>
+            <a href="{{ url_for('download_resume') }}" class="btn">Download Resume</a>
+        </div>
+        <div class="hero-right">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Photo">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-left">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Photo" class="about-photo">
+        </div>
+        <div class="about-right">
+            <h2>About Me</h2>
+            <p>
+                I am a passionate Python Developer with hands-on experience in web development,
+                AI-powered applications, and automation tools. Skilled in Flask, HTML, CSS,
+                JavaScript, and data handling, I enjoy building real-world tech solutions that make an impact.
+            </p>
+            <p>
+                My interests lie in Generative AI, automation, and web technologies.
+                I have worked on projects involving Large Language Models (LLMs), Langchain,
+                and OpenCV, including AI assistants, chatbots, news aggregators,
+                and translation tools. With experience as a Team Leader in Customer Experience,
+                I bring both technical expertise and strong collaboration skills.
+            </p>
+            <p>
+                Currently pursuing my Bachelor of Computer Science, I am continuously learning
+                and eager to contribute to innovative projects while improving my skills
+                as a Python & Flask Developer focused on GenAI and automation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skill">
+            <p>Python</p>
+            <div class="bar"><div class="fill" data-width="90%"></div></div>
+        </div>
+        <div class="skill">
+            <p>Flask</p>
+            <div class="bar"><div class="fill" data-width="85%"></div></div>
+        </div>
+        <div class="skill">
+            <p>Data Science</p>
+            <div class="bar"><div class="fill" data-width="80%"></div></div>
+        </div>
+        <div class="skill">
+            <p>Machine Learning</p>
+            <div class="bar"><div class="fill" data-width="75%"></div></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li><a href="https://github.com/SyedDanish6897/Smart-URL-Shortener" target="_blank">Smart URL Shortener</a></li>
+            <li><a href="https://github.com/SyedDanish6897/Customer-Satisfaction-Prediction" target="_blank">Customer-Satisfaction-Prediction</a></li>
+            <li><a href="https://github.com/SyedDanish6897/Electric-Vehicle-Sales" target="_blank">Electric-Vehicle-Sales</a></li>
+            <li><a href="https://github.com/SyedDanish6897/Data-Visualization-" target="_blank">Data Visualization</a></li>
+            <li><a href="https://github.com/SyedDanish6897/News-website" target="_blank">News Website</a></li>
+            <li><a href="https://github.com/SyedDanish6897" target="_blank">More on GitHub</a></li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>Contact: <a href="mailto:syeddanish6897@gmail.com">syeddanish6897@gmail.com</a></p>
+        <p>
+            <a href="https://github.com/SyedDanish6897" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/syeddanish" target="_blank">LinkedIn</a>
+        </p>
+        <p>© 2025 Syed Danish Majaz. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JS for animations -->
+    <script>
+        // Hamburger menu
+        function toggleMenu() {
+            document.getElementById("nav-links").classList.toggle("show");
+        }
+
+        // Reveal sections on scroll
+        const sections = document.querySelectorAll("section");
+        window.addEventListener("scroll", () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if(sectionTop < triggerBottom){
+                    section.classList.add("show");
+                }
+            });
+        });
+
+        // Highlight active link
+        const navLinks = document.querySelectorAll(".nav-right a");
+        window.addEventListener("scroll", () => {
+            let current = "";
+            document.querySelectorAll("section").forEach(section => {
+                const sectionTop = section.offsetTop - 80;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // Animate skills progress bars
+        const skills = document.querySelectorAll(".fill");
+        window.addEventListener("scroll", () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            skills.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                if (barTop < triggerBottom) {
+                    bar.style.width = bar.dataset.width;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
